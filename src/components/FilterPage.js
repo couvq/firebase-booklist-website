@@ -5,18 +5,31 @@ import { useState, useEffect } from "react";
 import BookCard from "./BookCard";
 
 import { getAllBooks } from "../firebase/getAllBooks";
+import { getBooksByYear } from "../firebase/getBooksByYear";
+
 
 const FilterPage = () => {
 
     const [year, setYear] = useState('All');
-    const [books, setBooks] = useState([]);
+    const [books, setBooks] = useState([]); // will hold all of our books
+    const [filteredBooks, setFilteredBooks] = useState([]); // this will hold our "filtered books", initially just a copy of books
 
     useEffect(() => { // initially populate all of our books
         getAllBooks().then((books) => {
             setBooks(books);
-            console.log(books);
+            setFilteredBooks(books);
         });
     }, []);
+
+    useEffect(() => { //set our filtered books when year state changes
+        if(year !== "All") {
+            getBooksByYear(year).then((filteredBooks) => {
+                setFilteredBooks(filteredBooks);
+            });
+        }
+        setFilteredBooks(books);
+    }, [year]);
+
 
   return (
     <>
@@ -50,8 +63,8 @@ const FilterPage = () => {
              }}
             >
                 <MenuItem value='All'>All</MenuItem>
-                <MenuItem value='2021'>2021</MenuItem>
-                <MenuItem value='2022'>2022</MenuItem>
+                <MenuItem value={2021}>2021</MenuItem>
+                <MenuItem value={2022}>2022</MenuItem>
             </Select>
         </FormControl>
 
@@ -71,7 +84,7 @@ const FilterPage = () => {
                 }
               />
             </Grid> */}
-            {books.map((book) => {
+            {filteredBooks.map((book) => {
           return (
             <Grid item xs={12} sm={6} md={6} lg={4}>
               <BookCard
