@@ -13,7 +13,7 @@ const FilterPage = () => {
     useEffect(() => { // initially populate all of our books
         getAllBooks().then((books) => {
             console.log(books);
-        })
+        });
     }, []);
 
   return (
