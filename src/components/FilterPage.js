@@ -12,7 +12,9 @@ const FilterPage = () => {
         }}
       >
         <div style={{
-            paddingTop: "5rem"
+            paddingTop: "5rem",
+            paddingLeft: "2rem",
+            paddingRight: "2rem"
         }}>
           <BookCard />
         </div>
