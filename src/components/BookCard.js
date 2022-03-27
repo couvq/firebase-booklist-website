@@ -20,7 +20,7 @@ const BookCard = ({
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia component="img" alt="image" height="200" image={ImageURL} />
         <CardContent>
-          <Typography gutterBottom variant="h4" component="div">
+          <Typography gutterBottom variant="h5" component="div">
             {Title}
           </Typography>
           <Typography variant="h6">By: {Author}</Typography>
