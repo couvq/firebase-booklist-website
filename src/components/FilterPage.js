@@ -35,7 +35,9 @@ const FilterPage = () => {
                 background: '#fff'
             }}
              value={year}
-            // onChange={setLanguage}
+             onChange={(e) => {
+                setYear(e.target.value);
+             }}
             >
                 <MenuItem value='All'>All</MenuItem>
                 <MenuItem value='2021'>2021</MenuItem>
