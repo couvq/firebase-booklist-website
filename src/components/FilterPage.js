@@ -3,12 +3,18 @@ import React from "react";
 const FilterPage = () => {
   return (
     <>
-      <div style={{
+      <div
+        style={{
           width: "100%",
           height: "100vh",
-          background: 'red'
-      }}>
-        <h1>This is the FilterPage Component</h1>
+          background: "#36454F",
+        }}
+      >
+        <div style={{
+            paddingTop: "5rem"
+        }}>
+          <h1>This is the FilterPage Component</h1>
+        </div>
       </div>
     </>
   );
