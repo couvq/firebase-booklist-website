@@ -11,7 +11,7 @@ const NavBar = () => {
             flexDirecton: "row",
             justifyContent: "space-between",
             alignItems: "center",
-            backgroundColor: "",
+            backgroundColor: "#000",
           }}
         >
           This is a toolbar
