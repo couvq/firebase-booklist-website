@@ -1,8 +1,13 @@
 import { Grid } from "@mui/material";
+import { FormControl, MenuItem, Select } from '@mui/material';
 import React from "react";
+import { useState } from "react";
 import BookCard from "./BookCard";
 
 const FilterPage = () => {
+
+    const [year, setYear] = useState('All');
+
   return (
     <>
       <div
@@ -21,10 +26,24 @@ const FilterPage = () => {
           style={{
             paddingTop: "5rem",
             paddingLeft: "2rem",
-            paddingRight: "2rem",
+            paddingRight: "2rem"
           }}
         >
-          <Grid container spacing={3}>
+        <FormControl size='small'>
+            <Select
+            sx={{
+                background: '#fff'
+            }}
+             value={year}
+            // onChange={setLanguage}
+            >
+                <MenuItem value='All'>All</MenuItem>
+                <MenuItem value='2021'>2021</MenuItem>
+                <MenuItem value='2022'>2022</MenuItem>
+            </Select>
+        </FormControl>
+
+          <Grid container spacing={4} sx={{ paddingTop: "2rem"}}>
             <Grid item xs={12} sm={6} md={6} lg={4}>
               <BookCard
                 ImageURL={
