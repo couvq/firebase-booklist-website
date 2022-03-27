@@ -28,7 +28,7 @@ const BookCard = ({ ImageURL, Title, Author, Recommendation, PurchaseLink}) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">{PurchaseLink}</Button>
+        <Button size="small" href={PurchaseLink}>Buy From Amazon</Button>
       </CardActions>
       </Card>
     </>
