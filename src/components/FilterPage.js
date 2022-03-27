@@ -20,7 +20,7 @@ const FilterPage = () => {
           ImageURL={"https://m.media-amazon.com/images/I/51mN3bY0JjL._SY346_.jpg"}
           Title={"The Subtle Art of Not Giving a Fuck"}
           Author={"Mark Manson"}
-          Recommendation={"I would recommend this to anyone"}
+          Recommendation={"I would recommend this to anyone really, it was a great read"}
           PurchaseLink={"https://www.amazon.com/Subtle-Art-Not-Giving-Counterintuitive-ebook/dp/B019MMUA8S"}
            />
         </div>
