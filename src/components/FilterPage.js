@@ -1,12 +1,20 @@
 import { Grid } from "@mui/material";
 import { FormControl, MenuItem, Select } from '@mui/material';
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BookCard from "./BookCard";
+
+import { getAllBooks } from "../firebase/getAllBooks";
 
 const FilterPage = () => {
 
     const [year, setYear] = useState('All');
+
+    useEffect(() => { // initially populate all of our books
+        getAllBooks().then((books) => {
+            console.log(books);
+        })
+    }, []);
 
   return (
     <>
