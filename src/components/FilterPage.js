@@ -1,4 +1,5 @@
 import React from "react";
+import BookCard from "./BookCard";
 
 const FilterPage = () => {
   return (
@@ -13,7 +14,7 @@ const FilterPage = () => {
         <div style={{
             paddingTop: "5rem"
         }}>
-          <h1>This is the FilterPage Component</h1>
+          <BookCard />
         </div>
       </div>
     </>
