@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { FormControl, MenuItem, Select } from '@mui/material';
+import { FormControl, MenuItem, Select } from "@mui/material";
 import React from "react";
 import { useState, useEffect } from "react";
 import BookCard from "./BookCard";
@@ -7,29 +7,30 @@ import BookCard from "./BookCard";
 import { getAllBooks } from "../firebase/getAllBooks";
 import { getBooksByYear } from "../firebase/getBooksByYear";
 
+import { motion, AnimatePresence } from "framer-motion";
 
 const FilterPage = () => {
+  const [year, setYear] = useState("All");
+  const [books, setBooks] = useState([]); // will hold all of our books
+  const [filteredBooks, setFilteredBooks] = useState([]); // this will hold our "filtered books", initially just a copy of books
 
-    const [year, setYear] = useState('All');
-    const [books, setBooks] = useState([]); // will hold all of our books
-    const [filteredBooks, setFilteredBooks] = useState([]); // this will hold our "filtered books", initially just a copy of books
+  useEffect(() => {
+    // initially populate all of our books
+    getAllBooks().then((books) => {
+      setBooks(books);
+      setFilteredBooks(books);
+    });
+  }, []);
 
-    useEffect(() => { // initially populate all of our books
-        getAllBooks().then((books) => {
-            setBooks(books);
-            setFilteredBooks(books);
-        });
-    }, []);
-
-    useEffect(() => { //set our filtered books when year state changes
-        if(year !== "All") {
-            getBooksByYear(year).then((filteredBooks) => {
-                setFilteredBooks(filteredBooks);
-            });
-        }
-        setFilteredBooks(books);
-    }, [year]);
-
+  useEffect(() => {
+    //set our filtered books when year state changes
+    if (year !== "All") {
+      getBooksByYear(year).then((filteredBooks) => {
+        setFilteredBooks(filteredBooks);
+      });
+    }
+    setFilteredBooks(books);
+  }, [year]);
 
   return (
     <>
@@ -49,27 +50,28 @@ const FilterPage = () => {
           style={{
             paddingTop: "5rem",
             paddingLeft: "2rem",
-            paddingRight: "2rem"
+            paddingRight: "2rem",
           }}
         >
-        <FormControl size='small'>
+          <FormControl size="small">
             <Select
-            sx={{
-                background: '#fff'
-            }}
-             value={year}
-             onChange={(e) => {
+              sx={{
+                background: "#fff",
+              }}
+              value={year}
+              onChange={(e) => {
                 setYear(e.target.value);
-             }}
+              }}
             >
-                <MenuItem value='All'>All</MenuItem>
-                <MenuItem value={2021}>2021</MenuItem>
-                <MenuItem value={2022}>2022</MenuItem>
+              <MenuItem value="All">All</MenuItem>
+              <MenuItem value={2021}>2021</MenuItem>
+              <MenuItem value={2022}>2022</MenuItem>
             </Select>
-        </FormControl>
-
-          <Grid container spacing={4} sx={{ paddingTop: "2rem"}}>
-            {/* <Grid item xs={12} sm={6} md={6} lg={4}>
+          </FormControl>
+          <motion.div layout>
+            <AnimatePresence>
+              <Grid container spacing={4} sx={{ paddingTop: "2rem" }}>
+                {/* <Grid item xs={12} sm={6} md={6} lg={4}>
               <BookCard
                 ImageURL={
                   "https://m.media-amazon.com/images/I/51mN3bY0JjL._SY346_.jpg"
@@ -84,26 +86,22 @@ const FilterPage = () => {
                 }
               />
             </Grid> */}
-            {filteredBooks.map((book) => {
-          return (
-            <Grid item xs={12} sm={6} md={6} lg={4}>
-              <BookCard
-                ImageURL={
-                  book.ImageURL
-                }
-                Title={book.Title}
-                Author={book.Author}
-                Recommendation={
-                  book.Recommendation
-                }
-                PurchaseLink={
-                  book.PurchaseLink
-                }
-              />
-            </Grid>
-          );
-        })}
-          </Grid>
+                {filteredBooks.map((book) => {
+                  return (
+                    <Grid item xs={12} sm={6} md={6} lg={4}>
+                      <BookCard
+                        ImageURL={book.ImageURL}
+                        Title={book.Title}
+                        Author={book.Author}
+                        Recommendation={book.Recommendation}
+                        PurchaseLink={book.PurchaseLink}
+                      />
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </AnimatePresence>
+          </motion.div>
         </div>
       </div>
     </>
