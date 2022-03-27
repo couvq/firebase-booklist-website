@@ -1,5 +1,6 @@
 import React from "react";
-import { AppBar, Toolbar } from "@mui/material";
+import { AppBar, Toolbar, Typography } from "@mui/material";
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 const NavBar = () => {
   return (
@@ -14,7 +15,9 @@ const NavBar = () => {
             backgroundColor: "#000",
           }}
         >
-          This is a toolbar
+          <MenuBookIcon />
+
+          <Typography>My Reading List</Typography>
         </Toolbar>
       </AppBar>
     </>
