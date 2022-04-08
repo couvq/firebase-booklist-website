@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import React from "react";
 import { useState, useEffect } from "react";
@@ -13,12 +13,14 @@ const FilterPage = () => {
   const [year, setYear] = useState("All");
   const [books, setBooks] = useState([]); // will hold all of our books
   const [filteredBooks, setFilteredBooks] = useState([]); // this will hold our "filtered books", initially just a copy of books
+  const [numBooks, setNumBooks] = useState(0); // 0 books to begin with
 
   useEffect(() => {
     // initially populate all of our books
     getAllBooks().then((books) => {
       setBooks(books);
       setFilteredBooks(books);
+      setNumBooks(books.length);
     });
   }, []);
 
@@ -27,9 +29,13 @@ const FilterPage = () => {
     if (year !== "All") {
       getBooksByYear(year).then((filteredBooks) => {
         setFilteredBooks(filteredBooks);
+        setNumBooks(filteredBooks.length);
+        return;
       });
     }
     setFilteredBooks(books);
+    setNumBooks(books.length);
+
   }, [year]);
 
   return (
@@ -69,6 +75,9 @@ const FilterPage = () => {
               <MenuItem value={2022}>2022</MenuItem>
             </Select>
           </FormControl>
+          <Typography sx={{
+            color: "white"
+          }}>Number of Books Read: {numBooks}</Typography>
           <Grid container spacing={4} sx={{ paddingTop: "2rem" }}>
             {/* <Grid item xs={12} sm={6} md={6} lg={4}>
               <BookCard
